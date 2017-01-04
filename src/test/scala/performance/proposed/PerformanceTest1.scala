@@ -33,7 +33,7 @@ class PerformanceTest1 extends FunSuite with Matchers {
   println(genIndicies.map(i => funcs(i)(i)).last)
   println(genIndicies.map(i => funcs(i)(i)).last)
 
-  test("additions (current impl)") {
+  test("additions (proposed impl)") {
     val start = System.nanoTime()
     println(indicies.map(i => funcs(i)(i)).last)
     val end = System.nanoTime()

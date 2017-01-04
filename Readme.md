@@ -8,7 +8,7 @@ Features:
 
 Performance details:  
 -creates one object per instance (hence consumes less memory and runs faster)  
-TODO: unprecise, need more (and better) performance tests.  
+TODO: imprecise, need more (and better) performance tests.  
 -jvisualvm monitor graph(taken while running the Coproduct creation benchmark included in this repo):
 
 shapeless existing impl: ![alt tag](https://lh3.googleusercontent.com/aRBgp6D1R6gjzjmXPOsUhyqkkcaw8JARrkiDLuVaw7a68k56D6oJbtPTkg5r1ta7YbAcm6BrArGZ6_kbz1lNniojyaHX_UsOWad_RXQ8d06Nx1pqfXE2M0aOK0sAbDL49f_QTslOU19c9jKrxTyYhKxQ5GEFUaihV19gCgUO5dAwQkGZScsaUHgMGWwD-NVZ3wq3yZAbLsmLdQKhiLQ8F5oz4VL1FmBC1xUfBh7l3xlwzI0DmkBlgmnTFiDqaItljQGMYiF99KyiaQ6SGFJNs15SKrZ52I1y-dY3c_CiRfnIm3o-uym-qd9OKWyAEuXKq0ztEollaHpxd8m7YPLxBSPLp8zfKd62gGPYN-r4HopiWYYPRk_dy64DVkF0nr-1nEqWDNK2odNUaIus_qjJUUexG6M0YtuCvXw5IA2M5t9Q-IymeiPdm7mAKzd4sc92uCBmHK0MToGqrvKxUpmvvmzG4x8h-GF-dTGRBysh5BFZgiWADgoGxhPar2Vz9f_27mkFuI33L9zTYT0HGln_VK-y_HruU6EyLHH_1GLXxAUZ6DxuJX4o0GTRyRqKCCT1iftvTd0HV2itNxlkq63TJ6OmGOeD3ihHx7rG_0PqIVNrwrJaz68fa0xpmMx1zunBoPtAe5IIo8ZYOldxmweNq_tnKa3JUzjS03Lf7VWOrA=w2300-h687-no)  

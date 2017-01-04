@@ -19,8 +19,8 @@ object ExtendRightBy {
 
   implicit def cnilR[S <: Shape]: Aux[S, Cnil, S] = null
 
-  implicit def inject[L, R <: Shape, L1, R1 <: Shape, O <: Shape, TLO <: Shape, IFO <: Nat](
-    implicit a: TLAddRight[L +: R, L1, TLO, _],
+  implicit def inject[S <: Shape, L1, R1 <: Shape, O <: Shape, TLO <: Shape](
+    implicit a: TLAddRight[S, L1, TLO, _],
     m: Aux[TLO, R1, O]
-  ): Aux[L +: R, L1 +: R1, O] = inst.asInstanceOf[Aux[L +: R, L1 +: R1, O]]
+  ): Aux[S, L1 +: R1, O] = inst.asInstanceOf[Aux[S, L1 +: R1, O]]
 }

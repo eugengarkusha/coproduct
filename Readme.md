@@ -7,7 +7,7 @@ Features:
 -minimized runtime overhead for ops typeclasses (TODO: implement Nat spawning using macros for greater benefit of this point)
 
 Performance advantages:  
--creates one object per instance (hence consumes less memory and performes faster)  
+-creates one object per instance (hence consumes less memory and runs faster)  
 TODO: unprecise, need more (and better) performance tests.
 
 Project is created for demo purpose (proof of concept).

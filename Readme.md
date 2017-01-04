@@ -4,12 +4,11 @@ Coproduct is represented  by a single container class having an 'index' and a 'v
 
 Features:  
 -no Inr/Inl boxing  
--minimized runtime overhead for ops typeclasses  
-(TODO: implement Nat spawning using macros for greater benefit of this point)  
+-minimized runtime overhead for ops typeclasses (TODO: implement Nat spawning using macros for greater benefit of this point)
 
-Approximate performance benefits(calculated using provided performance test, benchmarking the coproduct creation operation).
-- memory: consumes > 2x less memory
-- cpu: performes ~2x faster
+Approximate performance advantages(benchmarking the coproduct creation operation by the provided performance test).
+- memory: creates ~4x less objects (hence consumes less memory)
+- cpu: performes ~2x faster 
  TODO: unprecise, need more (and better) performance tests.
 
 It is created for demo purpose (proof of concept).

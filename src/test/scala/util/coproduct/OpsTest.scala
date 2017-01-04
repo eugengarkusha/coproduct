@@ -8,7 +8,6 @@ import util.coproduct.Coproduct.:+:
 import util.coproduct.ops.Add
 import util.coproduct.ops.IndexOf
 import util.coproduct.ops.Remove
-import util.coproduct.syntax
 
 class OpsTest extends FunSuite with Matchers {
 

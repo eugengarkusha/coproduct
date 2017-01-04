@@ -20,18 +20,14 @@ object TLIndexOf {
 
 }
 
-trait IndexOf[S <: Shape, V] {
+class IndexOf[S <: Shape, V](val i: Int) extends AnyVal{
   type Ind <: Nat
-  val i: Int
 }
 
 object IndexOf {
   type Aux [S<: Shape, V, I <: Nat] = IndexOf[S, V]{type Ind = I}
 
-  implicit def inst[S <: Shape, V, I <: Nat](implicit tli: TLIndexOf[S, V, I], ti: ToInt[I]):Aux[S, V, I] = new IndexOf[S, V] {
-    type Ind = I
-    val i = ti()
-  }
+  implicit def inst[S <: Shape, V, I <: Nat](implicit tli: TLIndexOf[S, V, I], ti: ToInt[I]):Aux[S, V, I] = new IndexOf[S, V](ti()).asInstanceOf[Aux[S, V, I]]
 
   def apply[S<: Shape, V](implicit io: IndexOf[S, V]) = io.i
 }

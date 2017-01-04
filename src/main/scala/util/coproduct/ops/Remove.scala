@@ -20,9 +20,17 @@ object TLRemove {
   implicit def found[T <: Shape, V, N <: Nat]: TLRemove[V +: T, V, _0, T] = null
 }
 
-trait Remove[S <: Shape, V] {
+class Remove[S <: Shape, V](val i: Int) extends AnyVal {
   type Rest <: Shape
-  def apply(s: Coproduct[S]): Either[Coproduct[Rest], V]
+  def apply(e: Coproduct[S]): Either[Coproduct[Rest], V]= {
+    if (i == e.i) {
+      Right(e.v.asInstanceOf[V])
+    } else if (i < e.i) {
+      Left(Coproduct(e.v, e.i - 1))
+    } else {
+      Left(e.asInstanceOf[Coproduct[Rest]])
+    }
+  }
 }
 
 object Remove {
@@ -30,19 +38,7 @@ object Remove {
   type Aux[S <: Shape, V, TO <: Shape] = Remove[S, V] {type Rest = TO}
 
   implicit def inst[S <: Shape, V, N <: Nat, TO <: Shape](implicit tle: TLRemove[S, V, N, TO], i: ToInt[N]): Aux[S, V, TO] = {
-    new Remove[S, V] {
-      type Rest = TO
-      def apply(e: Coproduct[S]): Either[Coproduct[Rest], V] = {
-        val ind = i()
-        if (ind == e.i) {
-          Right(e.v.asInstanceOf[V])
-        } else if (ind < e.i) {
-          Left(Coproduct(e.v, e.i - 1))
-        } else {
-          Left(e.asInstanceOf[Coproduct[Rest]])
-        }
-      }
-    }
+    new Remove[S, V](i()).asInstanceOf[Aux[S, V, TO]]
   }
 
   class ExtrSynt[V] {

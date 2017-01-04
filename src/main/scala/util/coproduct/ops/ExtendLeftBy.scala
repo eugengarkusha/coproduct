@@ -23,9 +23,9 @@ object TLExtendLeftBy {
   ): TLExtendLeftBy[S, L +: R, TLO, IFO] = null
 }
 
-trait ExtendLeftBy[S <: Shape, S1 <: Shape] {
+class ExtendLeftBy[S <: Shape, S1 <: Shape](val i: Int) extends AnyVal{
   type Out <: Shape
-  def apply(s: Coproduct[S]): Coproduct[Out]
+  def apply(s: Coproduct[S]): Coproduct[Out] = Coproduct(s.v, s.i + i)
 }
 
 object ExtendLeftBy {
@@ -33,8 +33,5 @@ object ExtendLeftBy {
   implicit def instance[S <: Shape, S1 <: Shape, O <: Shape, N <: Nat](
     implicit el: TLExtendLeftBy[S, S1, O, N],
     i: ToInt[N]
-  ): Aux[S, S1, O] = new ExtendLeftBy[S, S1] {
-    type Out = O
-    def apply(s: Coproduct[S]): Coproduct[Out] = Coproduct(s.v, s.i + i())
-  }
+  ): Aux[S, S1, O] = new ExtendLeftBy[S, S1](i()).asInstanceOf[Aux[S, S1, O]]
 }

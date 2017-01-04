@@ -8,7 +8,6 @@ import util.coproduct.+:
 import util.coproduct.Cnil
 import util.coproduct.Shape
 
-
 trait TLLength[S <: Shape, Out <: Nat]
 
 object TLLength {
@@ -16,15 +15,11 @@ object TLLength {
   implicit def rec[H, T <: Shape, N <: Nat](implicit s: TLLength[T, N]): TLLength[H +: T, Succ[N]] = null
 }
 
-trait Length[S <: Shape] {
+class Length[S <: Shape](val l: Int) extends AnyVal {
   type Out <: Nat
-  val l: Int
 }
 
 object Length {
-  type Aux[S <: Shape, O <: Nat] = Length[S]{type Out = O}
-  implicit def inst[S<: Shape, N<: Nat](implicit l: TLLength[S, N], _l: ToInt[N]) = new Length[S] {
-    type Out = N
-    val l = _l()
-  }
+  type Aux[S <: Shape, N <: Nat] = Length[S] {type Out = N}
+  implicit def inst[S <: Shape, N <: Nat](implicit l: TLLength[S, N], _l: ToInt[N]) = new Length[S](_l()).asInstanceOf[Aux[S, N]]
 }

@@ -17,22 +17,19 @@ object TLAdd extends TLAddLow {
   implicit def inject[S <: Shape, V, N <: Nat, N1 <: Nat](implicit e: TLIndexOf[S, V, N], p: Pred.Aux[N, N1]): TLAdd[S, V, S, N1] = null
 }
 
-trait Add[S <: Shape, V] {
+class Add[S <: Shape, V](val i: Int) extends AnyVal {
   type Out <: Shape
-  def apply(v: V): Coproduct[Out]
+  def apply(v: V): Coproduct[Out] = Coproduct(v, i)
 }
 
 object Add {
 
   type Aux[S <: Shape, V, O <: Shape] = Add[S, V] {type Out = O}
 
-  implicit def mainInst[S <: Shape, V, N <: Nat, O <: Shape](
+  implicit def inst[S <: Shape, V, N <: Nat, O <: Shape](
     implicit add: TLAdd[S, V, O, N],
     i: ToInt[N]
-  ): Aux[S, V, O] = new Add[S, V] {
-    type Out = O
-    def apply(v: V): Coproduct[Out] = Coproduct(v, i())
-  }
+  ): Aux[S, V, O] = new Add[S, V](i()).asInstanceOf[Aux[S, V, O]]
 
   class AddSynt[V](val v: V) extends AnyVal {
     def to[S <: Shape](implicit a: Add[S, V]): Coproduct[a.Out] = a(v)

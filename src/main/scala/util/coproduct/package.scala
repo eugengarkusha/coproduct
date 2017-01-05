@@ -10,6 +10,7 @@ import util.coproduct.ops.ExtendLeftBy
 import util.coproduct.ops.ExtendRightBy
 import util.coproduct.ops.Flatten
 import util.coproduct.ops.Remove
+import util.coproduct.ops.Transpose
 
 package object coproduct {
 
@@ -23,6 +24,8 @@ package object coproduct {
     def flatten(implicit f: Flatten[S]): Coproduct[f.Out] = f(e)
 
     def at[N <: Nat](ind: N)(implicit x: At[S, N]): Option[x.Out] = x(e)
+
+    def transpose[O<: Shape](implicit t: Transpose.Aux[S, O]): Coproduct[O] = t(e)
   }
 
 }

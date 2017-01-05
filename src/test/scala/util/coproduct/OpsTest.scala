@@ -10,7 +10,7 @@ import util.coproduct.ops._
 
 class OpsTest extends FunSuite with Matchers {
 
-  test("basic ops") {
+  test("basic ops") { // TODO: add structure to this test
 
     val e: Coproduct[+:[String, +:[Boolean, +:[Int, Cnil]]]] = Add(99).to[String +: Boolean :+: Int]
     e shouldBe Coproduct(99, 2)
@@ -88,6 +88,34 @@ class OpsTest extends FunSuite with Matchers {
 
     ki.at(Nat(2)) shouldBe Some(99)
     ki.at(Nat(1)) shouldBe None
+
+
+//Transposing: -----
+
+
+    implicitly[TLZipOne[
+      Int :+: Boolean,
+      Coproduct[Short :+: String] :+: Coproduct[Short :+: String],
+      Coproduct[Int +: Short:+: String] :+: Coproduct[Boolean +: Short:+: String]
+    ]]
+
+    implicitly[TLMapConst[Int :+: Coproduct[Int:+:String], Cnil, Cnil :+: Cnil]]
+
+    type toBeTransosed = Coproduct[Int +: String :+: Boolean] :+: Coproduct[Double +:Short  :+: Char]
+    type transposeRes =  Coproduct[Int :+: Double] +: Coproduct[String :+: Short] :+: Coproduct[Boolean :+: Char]
+
+    implicitly[TLTranspose[toBeTransosed, transposeRes]]
+
+    val inner = Add(true).to[Int +: String :+: Boolean]
+
+    val outer: Coproduct[toBeTransosed] = Add(inner).to[toBeTransosed]
+
+    val res: Coproduct[transposeRes] = outer.transpose
+    res shouldBe Coproduct(v = Coproduct(v = true, i = 0), i = 2)
+
+
+    //---------
+
 
   }
 }

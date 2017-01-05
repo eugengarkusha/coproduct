@@ -5,9 +5,8 @@ import org.scalatest.FunSuite
 import org.scalatest.Matchers
 import shapeless.Nat
 import util.coproduct.Coproduct.:+:
-import util.coproduct.ops.Add
-import util.coproduct.ops.IndexOf
-import util.coproduct.ops.Remove
+import util.coproduct.ops._
+
 
 class OpsTest extends FunSuite with Matchers {
 
@@ -83,6 +82,12 @@ class OpsTest extends FunSuite with Matchers {
     r5.i shouldBe 2
 
     Remove[Int].from(r4) shouldBe  Right(2)
+
+    val ki = Inject[Int +: Int :+: Int, Int](99).at(Nat(2))
+    ki.i shouldBe 2
+
+    ki.at(Nat(2)) shouldBe Some(99)
+    ki.at(Nat(1)) shouldBe None
 
   }
 }

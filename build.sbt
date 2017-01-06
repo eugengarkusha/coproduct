@@ -1,10 +1,8 @@
-name := "TypeAliasTest"
+name := "Coproduct"
 
 version := "1.0"
 
 scalaVersion := "2.12.1"
-
-scalacOptions += "-Ypartial-unification"
 
 resolvers += Resolver.sonatypeRepo("releases")
 
